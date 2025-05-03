@@ -2,26 +2,22 @@
     // 使用 Manifest V3，这是 Chrome 扩展的最新版本
     "manifest_version": 3,
     // 扩展的名称
-    "name": "Auth Token Sniffer",
+    "name": "Copy Tab URL",
     // 扩展的版本号
     "version": "1.0",
     // 扩展的简短描述
-    "description": "Automatically captures Authorization tokens from request headers",
+    "description": "点击扩展图标即可复制当前标签页的 URL，并显示提示。",
     // 扩展需要的权限列表
     "permissions": [
-        "webRequest", // 用于监听网络请求
-        "webRequestBlocking", // 用于修改请求头
-        "storage", // 用于本地存储 token 数据
-        "activeTab", // 用于获取当前标签页信息
-        "<all_urls>" // 允许访问所有网站的权限
+        "activeTab",
+        "notifications",
+        "scripting"
     ],
-    // 后台脚本配置
     "background": {
         "service_worker": "background.js" // 使用 service worker 作为后台脚本
     },
     // 扩展图标和弹出窗口配置
     "action": {
-        "default_popup": "popup.html",
         "default_icon": {
             "16": "images/icon16.png",
             "48": "images/icon48.png",
