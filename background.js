@@ -1,34 +1,4 @@
 console.log('Background script loaded!');
-/**
- * 只存储所有 JS 请求的 url、method、timestamp
- */
-
-let allRequests = [];
-
-// 监听来自内容脚本的消息
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === 'REQUEST_URL') {
-        console.log('[收到请求]:', {
-            url: request.url,
-            method: request.method
-        });
-        const reqInfo = {
-            url: request.url,
-            method: request.method,
-            timestamp: request.timestamp
-        };
-        allRequests.push(reqInfo);
-        chrome.storage.local.set({ allRequests }, () => {
-            console.log('[请求已保存]');
-        });
-    }
-
-    // 处理来自 popup 的获取所有请求请求
-    if (request.action === "getAllRequests") {
-        sendResponse({ allRequests });
-        return true;
-    }
-});
 
 chrome.action.onClicked.addListener(async (tab) => {
     if (tab && tab.url) {
