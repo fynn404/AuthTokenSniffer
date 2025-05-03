@@ -3,51 +3,82 @@
 
 <head>
     <title>Auth Token Sniffer</title>
+    <!-- 内联样式，定义弹出窗口的外观 -->
     <style>
+        /* 弹出窗口的基本样式 */
         body {
             width: 400px;
+            /* 设置弹出窗口宽度 */
             padding: 10px;
+            /* 内边距 */
             font-family: Arial, sans-serif;
+            /* 字体设置 */
         }
 
+        /* token 条目的样式 */
         .token-item {
             border: 1px solid #ddd;
+            /* 边框 */
             margin: 5px 0;
+            /* 上下外边距 */
             padding: 10px;
+            /* 内边距 */
             border-radius: 4px;
+            /* 圆角边框 */
         }
 
+        /* URL 显示样式 */
         .url {
             color: #666;
+            /* 文字颜色 */
             font-size: 0.9em;
+            /* 字体大小 */
         }
 
+        /* token 显示样式 */
         .token {
             word-break: break-all;
+            /* 允许在任意字符间换行 */
             background: #f5f5f5;
+            /* 背景色 */
             padding: 5px;
+            /* 内边距 */
             margin: 5px 0;
+            /* 上下外边距 */
         }
 
+        /* 时间戳显示样式 */
         .timestamp {
             color: #999;
+            /* 文字颜色 */
             font-size: 0.8em;
+            /* 字体大小 */
         }
 
+        /* HTTP 方法显示样式 */
         .method {
             display: inline-block;
+            /* 行内块级元素 */
             padding: 2px 6px;
+            /* 内边距 */
             background: #e0e0e0;
+            /* 背景色 */
             border-radius: 3px;
+            /* 圆角边框 */
             font-size: 0.8em;
+            /* 字体大小 */
             margin-right: 5px;
+            /* 右边距 */
         }
     </style>
 </head>
 
 <body>
+    <!-- 标题 -->
     <h2>Captured Authorization Tokens</h2>
+    <!-- token 列表容器 -->
     <div id="tokens"></div>
+    <!-- 引入 popup.js 脚本 -->
     <script src="popup.js"></script>
 </body>
 

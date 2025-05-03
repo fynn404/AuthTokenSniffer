@@ -10,6 +10,58 @@
 - 显示请求方法
 - 美观的界面展示
 
+## 开发步骤
+
+1. 创建项目目录结构：
+   ```
+   AuthTokenSniffer/
+   ├── manifest.json
+   ├── background.js
+   ├── popup.html
+   ├── popup.js
+   ├── README.md
+   └── images/
+       ├── icon16.png
+       ├── icon48.png
+       └── icon128.png
+   ```
+
+2. 创建 manifest.json 文件，定义扩展的基本信息和权限
+3. 创建 background.js 文件，实现 token 捕获的核心逻辑
+4. 创建 popup.html 和 popup.js 文件，实现用户界面
+5. 创建图标文件（16x16、48x48、128x128 像素）
+6. 在 Chrome 中加载扩展进行测试
+
+## 插件工作流程
+
+1. **初始化阶段**：
+   - 扩展加载时，background.js 中的 service worker 开始运行
+   - 初始化 capturedTokens 数组用于存储捕获的 token
+
+2. **请求监听阶段**：
+   - 通过 chrome.webRequest.onBeforeSendHeaders 监听所有网络请求
+   - 检查每个请求的 headers 中是否包含 Authorization 头
+   - 如果找到 Authorization 头，提取 token 信息
+
+3. **Token 处理阶段**：
+   - 创建包含以下信息的 token 对象：
+     - URL：请求的来源地址
+     - Token：Authorization 头的值
+     - 时间戳：捕获时间
+     - 方法：HTTP 请求方法（GET、POST 等）
+   - 将 token 信息添加到 capturedTokens 数组
+   - 使用 chrome.storage.local 将 token 信息持久化存储
+
+4. **用户界面交互阶段**：
+   - 用户点击扩展图标时，popup.html 页面加载
+   - popup.js 从 chrome.storage.local 获取存储的 token 信息
+   - 将 token 信息格式化并显示在 popup 页面中
+
+5. **数据持久化**：
+   - 所有捕获的 token 都存储在浏览器的本地存储中
+   - 即使浏览器关闭，token 信息也会被保留
+   - 数据完全本地存储，不会发送到任何服务器
+
 ## 安装说明
 
 1. 下载或克隆此仓库到本地
